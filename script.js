@@ -4,13 +4,13 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
+    apiKey: "AlzaSyBs5vV0jM-vSB5tzcJ-_oUfHevc8eKeAUl",
+    authDomain: "t3alel-12.firebaseapp.com",
+    projectId: "t3alel-12",
+    storageBucket: "t3alel-12.appspot.com",
     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    databaseURL: "YOUR_DATABASE_URL"
+    appId: "1:802800407984:android:e9651dc6d7fbc91da17275",
+    databaseURL: "https://t3alel-12.firebaseio.com"
 };
 
 // Initialize Firebase
