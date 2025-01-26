@@ -122,17 +122,17 @@
       animation: fadeIn 2s ease-in-out 1s forwards; /* Fades in later */
     }
 
-    /* Button Styling (Text Only with Animated Gradient) */
+    /* Download Button Styling */
     .button {
       line-height: 1;
       background-color: transparent;
       cursor: pointer;
       display: inline-block; /* Changed to inline-block for text-only button */
-      padding: 0.75em 1em;
+      padding: 1em 2em;
       color: transparent;  /* Make text color transparent */
       font-weight: 700;
       border: 2px solid transparent;
-      font-size: 1.5rem;  /* Slightly larger text */
+      font-size: 1.8rem;  /* Larger font size for emphasis */
       border-radius: 2em;
       text-align: center;
       font-family: 'Lateef', serif;
@@ -140,13 +140,14 @@
       background-size: 200% 200%;
       -webkit-background-clip: text;  /* This makes the gradient visible on the text */
       animation: gradientMove 3s ease-in-out infinite;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* Hover Effect */
     .button:hover {
       border-color: #f4f5f2;
-      transform: scale(1.05);  /* Slight zoom effect on hover */
+      transform: scale(1.1);  /* Slight zoom effect on hover */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Soft shadow on hover */
     }
 
     /* Active State (click effect) */
