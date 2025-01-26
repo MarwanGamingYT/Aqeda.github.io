@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', Arial, sans-serif;
+      font-family: 'Tajawal', Arial, sans-serif; /* Arabic-friendly font */
       background-color: #ffffff;
       color: #333;
       height: 100vh;
@@ -18,60 +18,66 @@
       flex-direction: column;
     }
 
-    /* Hero Section Styling */
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px; /* Reduced padding for a smaller header */
-      background: #f5f5f5;
-      border-bottom: 2px solid #ddd;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Keyframes for Fade-in Animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .hero img {
-      width: 80px; /* Smaller size for images */
-      height: 80px;
-      border-radius: 12px;
-      transition: all 0.3s ease; /* Smooth transition for hover effect */
-    }
-
-    .hero img:hover {
-      width: 70px; /* Shrinks slightly on hover */
-      height: 70px;
-    }
-
-    .hero-text {
-      font-size: 1.5rem; /* Smaller text size */
-      font-weight: bold;
-      text-align: center;
-      flex-grow: 1;
-      color: #333;
-      transition: transform 0.3s ease, font-size 0.3s ease; /* Transition for hover effect */
-    }
-
-    .hero-text:hover {
-      font-size: 1.4rem; /* Slightly smaller text on hover */
-      transform: scale(0.95); /* Adds a subtle shrink effect */
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
     }
 
     /* Wiki Content Styling */
     .wiki-container {
       flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-weight: bold;
-      font-size: 2rem;
-      color: #444;
       padding: 20px;
     }
 
-    .wiki-container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Main Text Styling */
+    .main-text {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, black, lightgreen, darkgreen);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 3s linear infinite, fadeIn 1s ease-in-out;
+    }
+
+    /* Second Main Part Styling */
+    .secondary-text {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #333;
+      opacity: 0; /* Starts hidden */
+      animation: fadeIn 1.5s ease-in-out 0.5s forwards; /* Fades in after a short delay */
+    }
+
+    /* Bottom Section Styling */
+    .bottom-text {
+      margin-top: 50px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #444;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out 1s forwards; /* Fades in later */
     }
   </style>
 </head>
@@ -85,9 +91,12 @@
 
   <!-- Wiki Content -->
   <div class="wiki-container">
-    Well Done! 👏  
-    <br>
-    This is your simple wiki page. 🎉
+    <!-- Main Text Section -->
+    <div class="main-text">ما الهدف؟</div>
+    <!-- Secondary Text Section -->
+    <div class="secondary-text">هدفنا هو تقديم أفضل تجربة، حيث البساطة والجمال يجتمعان في تصميم واحد.</div>
+    <!-- Bottom Text Section -->
+    <div class="bottom-text">شكراً لانضمامكم إلينا، نحن في طريقنا نحو الأفضل.</div>
   </div>
 </body>
 </html>
