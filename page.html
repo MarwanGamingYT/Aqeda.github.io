@@ -122,54 +122,47 @@
       animation: fadeIn 2s ease-in-out 1s forwards; /* Fades in later */
     }
 
-    /* Button Styling */
+    /* Button Styling (Text Only with Animated Gradient) */
     .button {
       line-height: 1;
       background-color: transparent;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.35em;
+      display: inline-block; /* Changed to inline-block for text-only button */
       padding: 0.75em 1em;
-      padding-right: 1.25em;
-      color: #fff;
-      border: 1px solid transparent;
+      color: transparent;  /* Make text color transparent */
       font-weight: 700;
+      border: 2px solid transparent;
+      font-size: 1.5rem;  /* Slightly larger text */
       border-radius: 2em;
-      font-size: 1rem;
-      box-shadow: 0 0.7em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
-      transition: transform 0.3s;
-      position: fixed;
-      bottom: 20px;  /* Position at the bottom */
-      left: 20px;    /* Position at the left */
-      z-index: 1000; /* Ensure it's above other content */
-      background: linear-gradient(
-        90deg,
-        darkgreen 0%,    /* Dark Green */
-        lightgreen 100%   /* Light Green */
-      );
-    }
-
-    /* Button Icon (if any) */
-    .button__icon {
-      width: 1.5em;
-      height: 1.5em;
+      text-align: center;
+      font-family: 'Lateef', serif;
+      background: linear-gradient(90deg, darkgreen 0%, lightgreen 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;  /* This makes the gradient visible on the text */
+      animation: gradientMove 3s ease-in-out infinite;
+      transition: transform 0.3s ease;
     }
 
     /* Hover Effect */
     .button:hover {
       border-color: #f4f5f2;
-      background: linear-gradient(
-        90deg,
-        darkgreen 0%,    /* Dark Green */
-        lightgreen 100%   /* Light Green */
-      );
+      transform: scale(1.05);  /* Slight zoom effect on hover */
     }
 
     /* Active State (click effect) */
     .button:active {
       transform: scale(0.98);
       box-shadow: 0 0.5em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+    }
+
+    /* Gradient Animation */
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
     }
   </style>
 </head>
@@ -191,9 +184,9 @@
     <div class="bottom-text">عن حديث أنس بن مالك (رضي الله عنه) قال: قال رسول الله (صلى الله عليه وسلم): انصر أخاكَ ظالماً أو مظلوماً، فقال رجل: يا رسول الله، أنصره إذا كان مظلوماً، افرأيتَ إذا كان ظالماً كيف أنصره؟ قال: تحجزه أو تمنعه من الظلم فإن ذلك نصره. | رواه البخاري</div>
   </div>
 
-  <!-- Download Button -->
+  <!-- Download Button (Text Only with Animated Gradient) -->
   <a href="your-link-here.com" class="button" target="_blank">
-    <span class="button__icon">⬇️</span> Download
+    Download
   </a>
 </body>
 </html>
