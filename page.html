@@ -10,89 +10,72 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', Arial, sans-serif; /* Modern, clean font */
+      font-family: 'Poppins', Arial, sans-serif;
       background-color: #ffffff; /* White background */
       color: #333; /* Subtle dark text */
       height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column; /* Stack elements vertically */
     }
 
-    /* Hero Container */
-    .hero-container {
-      position: relative;
-      width: 90%; /* Flexible width */
-      max-width: 800px; /* Maximum width */
-      height: 80%; /* Flexible height */
-      background-color: #ffffff; /* White background */
-      border-radius: 20px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    /* Hero Section Styling */
+    .hero {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      padding: 20px 30px;
+      background: #f5f5f5; /* Light gray background for header */
+      border-bottom: 2px solid #ddd;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for header */
     }
 
-    /* Hover Effect */
-    .hero-container:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    .hero img {
+      width: 100px; /* Resize images */
+      height: 100px;
+      border-radius: 15px; /* Rounded edges for images */
     }
 
-    /* Top Left Image */
-    .top-left {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 512px;
-      height: 512px;
-      background: url('image1.png') no-repeat center center;
-      background-size: contain;
-    }
-
-    /* Top Right Image */
-    .top-right {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 512px;
-      height: 512px;
-      background: url('image2.png') no-repeat center center;
-      background-size: contain;
-    }
-
-    /* Center Text */
-    .center-text {
-      font-size: 3rem; /* Large text */
+    .hero-text {
+      font-size: 2rem;
       font-weight: bold;
-      color: #444; /* Nice contrast */
-      z-index: 1;
+      text-align: center;
+      flex-grow: 1; /* Push text to the center */
+      color: #333;
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .top-left, .top-right {
-        width: 200px;
-        height: 200px;
-      }
-      .center-text {
-        font-size: 2rem;
-      }
+    /* Wiki Content Styling */
+    .wiki-container {
+      flex: 1; /* Take remaining vertical space */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: 2rem;
+      color: #444;
+      padding: 20px;
+    }
+
+    .wiki-container:hover {
+      transform: translateY(-5px); /* Slight lift effect */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
   </style>
 </head>
 <body>
-  <div class="hero-container">
-    <!-- Top Left Image -->
-    <div class="top-left"></div>
+  <!-- Hero Section -->
+  <header class="hero">
+    <img src="image1.png" alt="Image 1 (Top Left)">
+    <div class="hero-text">مستمرون</div>
+    <img src="image2.png" alt="Image 2 (Top Right)">
+  </header>
 
-    <!-- Center Text -->
-    <div class="center-text">مستمرون</div>
-
-    <!-- Top Right Image -->
-    <div class="top-right"></div>
+  <!-- Wiki Content -->
+  <div class="wiki-container">
+    Well Done! 👏  
+    <br>
+    This is your simple wiki page. 🎉
   </div>
 </body>
 </html>
