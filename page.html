@@ -116,6 +116,56 @@
       opacity: 0;
       animation: fadeIn 2s ease-in-out 1s forwards; /* Fades in later */
     }
+
+    /* Button Styling */
+    .button {
+      line-height: 1;
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35em;
+      padding: 0.75em 1em;
+      padding-right: 1.25em;
+      color: #fff;
+      border: 1px solid transparent;
+      font-weight: 700;
+      border-radius: 2em;
+      font-size: 1rem;
+      box-shadow: 0 0.7em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+      transition: transform 0.3s;
+      position: fixed;
+      bottom: 20px;  /* Position at the bottom */
+      left: 20px;    /* Position at the left */
+      z-index: 1000; /* Ensure it's above other content */
+      background: linear-gradient(
+        90deg,
+        darkgreen 0%,    /* Dark Green */
+        lightgreen 100%   /* Light Green */
+      );
+    }
+
+    /* Button Icon (if any) */
+    .button__icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+    /* Hover Effect */
+    .button:hover {
+      border-color: #f4f5f2;
+      background: linear-gradient(
+        90deg,
+        darkgreen 0%,    /* Dark Green */
+        lightgreen 100%   /* Light Green */
+      );
+    }
+
+    /* Active State (click effect) */
+    .button:active {
+      transform: scale(0.98);
+      box-shadow: 0 0.5em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+    }
   </style>
 </head>
 <body>
@@ -135,5 +185,10 @@
     <!-- Bottom Text Section -->
     <div class="bottom-text">شكراً لانضمامكم إلينا، نحن في طريقنا نحو الأفضل.</div>
   </div>
+
+  <!-- Download Button -->
+  <a href="your-link-here.com" class="button" target="_blank">
+    <span class="button__icon">⬇️</span> Download
+  </a>
 </body>
 </html>
