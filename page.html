@@ -13,7 +13,7 @@
       font-family: 'Tajawal', Arial, sans-serif; /* Arabic-friendly font */
       background-color: #ffffff;
       color: #333;
-      height: 100vh;
+      height: 100%;
       display: flex;
       flex-direction: column;
     }
@@ -37,6 +37,43 @@
       100% {
         background-position: 100% 50%;
       }
+    }
+
+    /* Hero Section Styling */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px; /* Reduced padding for a smaller header */
+      background: #f5f5f5;
+      border-bottom: 2px solid #ddd;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero img {
+      width: 80px; /* Smaller size for images */
+      height: 80px;
+      border-radius: 12px;
+      transition: all 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    .hero img:hover {
+      width: 70px; /* Shrinks slightly on hover */
+      height: 70px;
+    }
+
+    .hero-text {
+      font-size: 1.5rem; /* Smaller text size */
+      font-weight: bold;
+      text-align: center;
+      flex-grow: 1;
+      color: #333;
+      transition: transform 0.3s ease, font-size 0.3s ease; /* Transition for hover effect */
+    }
+
+    .hero-text:hover {
+      font-size: 1.4rem; /* Slightly smaller text on hover */
+      transform: scale(0.95); /* Adds a subtle shrink effect */
     }
 
     /* Wiki Content Styling */
@@ -82,14 +119,14 @@
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
+  <!-- Hero Section (Header) -->
   <header class="hero">
     <img src="image1.png" alt="Image 1 (Top Left)">
     <div class="hero-text">مستمرون</div>
     <img src="image2.png" alt="Image 2 (Top Right)">
   </header>
 
-  <!-- Wiki Content -->
+  <!-- Wiki Content (Main Section) -->
   <div class="wiki-container">
     <!-- Main Text Section -->
     <div class="main-text">ما الهدف؟</div>
