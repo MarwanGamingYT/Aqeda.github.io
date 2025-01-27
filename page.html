@@ -4,158 +4,260 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>حملة مستمرون</title>
-  
-  <!-- Import Lateef Font -->
   <link href="https://fonts.googleapis.com/earlyaccess/lateef.css" rel="stylesheet">
-  
-  <!-- Inline Critical CSS for Faster Load -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preload" href="https://fonts.googleapis.com/earlyaccess/lateef.css" as="style">
+  <link rel="preload" href="image1.png" as="image">
+  <link rel="preload" href="image2.png" as="image">
+
   <style>
-    /* General Reset */
+    :root {
+      --primary: #2e7d32;
+      --secondary: #81c784;
+      --accent: #ffd54f;
+      --dark: #1b5e20;
+      --light: #f8f9fa;
+      --gradient: linear-gradient(135deg, var(--dark), var(--primary));
+    }
+
+    /* Base Styles */
     body, html {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Lateef', serif;
-      font-size: 25px;
-      background-color: #ffffff;
+      font-size: 24px;
+      background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0);
+      background-size: 40px 40px;
       color: #333;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
     }
 
-    /* Keyframes for Fade-in Animation */
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
-
-    /* Hero Section Styling */
+    /* Modern Header */
     .hero {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      background: #f5f5f5;
-      border-bottom: 2px solid #ddd;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 2px solid var(--secondary);
     }
 
     .hero img {
       width: 80px;
       height: 80px;
-      border-radius: 12px;
-      transition: all 0.3s ease;
+      border-radius: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .hero img:hover {
-      transform: scale(0.95);
+      transform: scale(0.95) rotate(-2deg);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .hero-text {
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-align: center;
-      flex-grow: 1;
-      color: #333;
-      transition: transform 0.3s ease, font-size 0.3s ease;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
     }
 
-    .hero-text:hover {
-      transform: scale(0.95);
+    .hero-text::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 50%;
+      width: 60%;
+      height: 3px;
+      background: var(--primary);
+      transform: translateX(50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    /* Wiki Content Styling */
+    .hero-text:hover::after {
+      opacity: 1;
+    }
+
+    /* Main Content */
     .wiki-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
+      margin-top: 120px;
+      padding: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
     }
 
-    /* Main Text Styling */
     .main-text {
-      font-size: 2.5rem;
-      font-weight: bold;
-      background: linear-gradient(90deg, black, lightgreen, darkgreen);
-      background-size: 300%;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--dark), var(--primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientMove 3s linear infinite, fadeIn 1s ease-in-out;
-    }
-
-    /* Secondary Text Styling */
-    .secondary-text {
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: #333;
-      opacity: 0;
-      animation: fadeIn 1.5s ease-in-out 0.5s forwards;
-    }
-
-    /* Bottom Text Styling */
-    .bottom-text {
-      margin-top: 50px;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #444;
-      opacity: 0;
-      animation: fadeIn 2s ease-in-out 1s forwards;
-    }
-
-    /* Download Button Styling */
-    .button {
-      line-height: 1;
-      background-color: transparent;
-      cursor: pointer;
-      display: inline-block;
-      padding: 1em 2em;
-      color: transparent;
-      font-weight: 700;
-      border: 2px solid transparent;
-      font-size: 1.8rem;
-      border-radius: 2em;
+      margin-bottom: 2rem;
       text-align: center;
-      font-family: 'Lateef', serif;
-      background: linear-gradient(90deg, darkgreen 0%, lightgreen 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      animation: gradientMove 3s ease-in-out infinite;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    .secondary-text {
+      font-size: clamp(1.2rem, 3vw, 1.4rem);
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.3s forwards;
     }
 
-    .button:active {
-      transform: scale(0.98);
+    .bottom-text {
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
+      color: var(--dark);
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-right: 4px solid var(--secondary);
+      background: linear-gradient(to left, rgba(129, 199, 132, 0.1), transparent);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
     }
 
-    /* Green Icon Styling */
-    .green-icon {
-      margin-top: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: green;
-      display: inline-block;
+    /* Download Buttons */
+    .download-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+    }
+
+    .download-button {
+      padding: 1.2rem 2.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.3rem;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      animation: buttonEntrance 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .download-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .download-button:hover::before {
+      opacity: 1;
+    }
+
+    .android {
+      background: #ffffff;
+      color: #34a853;
+      box-shadow: 0 4px 15px rgba(52, 168, 83, 0.2);
+      border: 2px solid #34a853;
+      animation-delay: 0.3s;
+    }
+
+    .android:hover {
+      background: #34a853;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .ios {
+      background: #ffffff;
+      color: #1d1d1f;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 2px solid #1d1d1f;
+      animation-delay: 0.5s;
+    }
+
+    .ios:hover {
+      background: #1d1d1f;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .download-button:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .download-button i {
       transition: transform 0.3s ease;
+      font-size: 1.5em;
+    }
+
+    .download-button:hover i {
+      transform: rotate(360deg);
+    }
+
+    /* Green Icon */
+    .green-icon {
+      display: block;
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--primary);
+      cursor: pointer;
+      margin: 2rem auto;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .green-icon:hover {
-      transform: scale(1.2);
+      transform: scale(1.2) rotate(15deg);
+      color: var(--accent);
     }
 
-    /* Popup Styling */
+    /* Enhanced Button */
+    .button {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto;
+      padding: 1rem 3rem;
+      font-size: 1.4rem;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.9s forwards;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+    }
+
+    /* Modern Popup */
     .popup-overlay {
       display: none;
       position: fixed;
@@ -163,131 +265,124 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
       justify-content: center;
       align-items: center;
-      z-index: 9999;
-      animation: fadeInOverlay 0.3s ease-in-out;
-    }
-
-    @keyframes fadeInOverlay {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+      z-index: 2000;
+      animation: fadeInOverlay 0.3s ease;
     }
 
     .popup-content {
-      background-color: white;
-      padding: 40px;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 2.5rem;
+      border-radius: 20px;
       width: 90%;
       max-width: 600px;
-      font-size: 1.6rem;
-      font-family: 'Lateef', serif;
-      color: #333;
-      text-align: center;
-      animation: scaleIn 0.3s ease-in-out;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      transform: scale(0.95);
+      opacity: 0;
+      animation: scaleIn 0.3s ease forwards;
     }
 
-    @keyframes scaleIn {
-      0% { transform: scale(0.9); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .popup-content p {
+      font-size: 1.4rem;
+      line-height: 1.8;
+      color: var(--dark);
+      margin-bottom: 2rem;
     }
 
-    /* Back Button Styling */
     .back-button {
       display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
       color: white;
-      border-radius: 10px;
-      cursor: pointer;
+      border-radius: 50px;
       text-decoration: none;
       font-size: 1.2rem;
+      transition: all 0.3s ease;
     }
 
     .back-button:hover {
-      background-color: #45a049;
-    }
-
-    /* Download Buttons Styling */
-    .download-buttons {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-      gap: 20px;
-    }
-
-    .download-button {
-      display: inline-block;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .download-button.android {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .download-button.ios {
-      background-color: #000;
-      color: white;
-    }
-
-    .download-button:hover {
+      background: var(--dark);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInOverlay {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes buttonEntrance {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Responsive Design */
     @media (max-width: 768px) {
-      .hero-text {
-        font-size: 1.2rem;
+      body { font-size: 20px; }
+      
+      .hero { padding: 0.8rem 1rem; }
+      .hero img { width: 60px; height: 60px; }
+      .hero-text { font-size: 1.5rem; }
+      
+      .popup-content {
+        padding: 1.5rem;
       }
-      .main-text {
-        font-size: 2rem;
+
+      .download-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
       }
-      .secondary-text {
-        font-size: 1.2rem;
-      }
-      .bottom-text {
-        font-size: 1.4rem;
-      }
-      .download-buttons {
-        flex-direction: column;
-        gap: 10px;
-      }
+    }
+
+    /* Accessibility */
+    .button:focus,
+    .download-button:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
-  <!-- Hero Section (Header) -->
   <header class="hero">
-    <img src="image1.png" alt="شعار الحملة (أعلى اليسار)" loading="lazy">
+    <img src="image1.png" alt="شعار الحملة" width="80" height="80" loading="lazy">
     <div class="hero-text">مستمرون</div>
-    <img src="image2.png" alt="شعار الحملة (أعلى اليمين)" loading="lazy">
+    <img src="image2.png" alt="شعار الحملة" width="80" height="80" loading="lazy">
   </header>
 
-  <!-- Wiki Content (Main Section) -->
   <div class="wiki-container">
     <div class="main-text">ما الهدف؟</div>
-    <div class="secondary-text">تهدف هذه الحملة الى التذكير بمقاطعة المنتجات التي ثبت دعمها للكيان الصهيوني الغاصب</div>
-    <div class="bottom-text">عن حديث أنس بن مالك (رضي الله عنه) قال: قال رسول الله (صلى الله عليه وسلم): انصر أخاكَ ظالماً أو مظلوماً، فقال رجل: يا رسول الله، أنصره إذا كان مظلوماً، افرأيتَ إذا كان ظالماً كيف أنصره؟ قال: تحجزه أو تمنعه من الظلم فإن ذلك نصره. | رواه البخاري</div>
-    <div class="green-icon" onclick="openPopup()">⭐</div>
-  </div>
+    
+    <div class="secondary-text">
+      تهدف هذه الحملة إلى التذكير بمقاطعة المنتجات التي ثبت دعمها للكيان الصهيوني الغاصب
+    </div>
 
-  <!-- Download Button -->
-  <a href="#" class="button" onclick="openDownloadPopup()">تنزيل التطبيق</a>
+    <div class="bottom-text">
+      عن حديث أنس بن مالك (رضي الله عنه) قال: قال رسول الله (صلى الله عليه وسلم): 
+      "انصر أخاكَ ظالماً أو مظلوماً، فقال رجل: يا رسول الله، أنصره إذا كان مظلوماً، 
+      افرأيتَ إذا كان ظالماً كيف أنصره؟ قال: تحجزه أو تمنعه من الظلم فإن ذلك نصره" 
+      | رواه البخاري
+    </div>
+
+    <div class="green-icon" onclick="openPopup()">⭐</div>
+    <a href="#" class="button" onclick="openDownloadPopup()">تنزيل التطبيق</a>
+  </div>
 
   <!-- Popup for Green Icon -->
   <div id="popup-overlay" class="popup-overlay">
     <div class="popup-content">
-      <p>توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه فوجب أن نصحح المبدأ بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط بل هي باب إنساني مهم.. يمكنكم تنزيل التطبيق المرفق بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان</p>
+      <p>
+        توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه فوجب أن نصحح المبدأ بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط بل هي باب إنساني مهم.. يمكنكم تنزيل التطبيق المرفق بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان
+      </p>
       <a href="#" class="back-button" onclick="closePopup()">رجوع</a>
     </div>
   </div>
@@ -297,32 +392,64 @@
     <div class="popup-content">
       <p>اختر نظام التشغيل لتنزيل التطبيق:</p>
       <div class="download-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.moqate3.moqate3" class="download-button android" target="_blank">Android</a>
-        <a href="https://apps.apple.com/app/belzamesh-%D8%A8%D9%84%D8%B2%D9%85%D8%B4/id6472342593" class="download-button ios" target="_blank">iOS</a>
+        <a href="https://play.google.com/store/apps/details?id=com.moqate3.moqate3" 
+           class="download-button android"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fab fa-android"></i>
+          أندرويد
+        </a>
+        <a href="https://apps.apple.com/app/belzamesh-%D8%A8%D9%84%D8%B2%D9%85%D8%B4/id6472342593" 
+           class="download-button ios"
+           target="_blank"
+           rel="noopener noreferrer">
+          <i class="fab fa-apple"></i>
+          آيفون
+        </a>
       </div>
       <a href="#" class="back-button" onclick="closeDownloadPopup()">رجوع</a>
     </div>
   </div>
 
   <script>
-    // Function to open the popup for the green icon
+    // Popup Functions
+    function handlePopupClick(e) {
+      if (e.target === document.getElementById('popup-overlay')) {
+        closePopup();
+      }
+      if (e.target === document.getElementById('download-popup-overlay')) {
+        closeDownloadPopup();
+      }
+    }
+
     function openPopup() {
-      document.getElementById('popup-overlay').style.display = 'flex';
+      const popup = document.getElementById('popup-overlay');
+      popup.style.display = 'flex';
+      popup.addEventListener('click', handlePopupClick);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePopup();
+      });
     }
 
-    // Function to close the popup for the green icon
     function closePopup() {
-      document.getElementById('popup-overlay').style.display = 'none';
+      const popup = document.getElementById('popup-overlay');
+      popup.style.display = 'none';
+      popup.removeEventListener('click', handlePopupClick);
     }
 
-    // Function to open the popup for the download button
     function openDownloadPopup() {
-      document.getElementById('download-popup-overlay').style.display = 'flex';
+      const popup = document.getElementById('download-popup-overlay');
+      popup.style.display = 'flex';
+      popup.addEventListener('click', handlePopupClick);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDownloadPopup();
+      });
     }
 
-    // Function to close the popup for the download button
     function closeDownloadPopup() {
-      document.getElementById('download-popup-overlay').style.display = 'none';
+      const popup = document.getElementById('download-popup-overlay');
+      popup.style.display = 'none';
+      popup.removeEventListener('click', handlePopupClick);
     }
   </script>
 </body>
