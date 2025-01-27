@@ -156,7 +156,7 @@
     }
 
     /* Popup Styling */
-    .popup {
+    .popup-overlay {
       display: none;
       position: fixed;
       top: 0;
@@ -167,6 +167,12 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      animation: fadeInOverlay 0.3s ease-in-out;
+    }
+
+    @keyframes fadeInOverlay {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     .popup-content {
@@ -179,7 +185,12 @@
       font-family: 'Lateef', serif;
       color: #333;
       text-align: center;
-      animation: fadeIn 0.5s ease-in-out;
+      animation: scaleIn 0.3s ease-in-out;
+    }
+
+    @keyframes scaleIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     /* Back Button Styling */
@@ -274,7 +285,7 @@
   <a href="#" class="button" onclick="openDownloadPopup()">تنزيل التطبيق</a>
 
   <!-- Popup for Green Icon -->
-  <div id="popup" class="popup">
+  <div id="popup-overlay" class="popup-overlay">
     <div class="popup-content">
       <p>توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه فوجب أن نصحح المبدأ بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط بل هي باب إنساني مهم.. يمكنكم تنزيل التطبيق المرفق بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان</p>
       <a href="#" class="back-button" onclick="closePopup()">رجوع</a>
@@ -282,7 +293,7 @@
   </div>
 
   <!-- Popup for Download Button -->
-  <div id="download-popup" class="popup">
+  <div id="download-popup-overlay" class="popup-overlay">
     <div class="popup-content">
       <p>اختر نظام التشغيل لتنزيل التطبيق:</p>
       <div class="download-buttons">
@@ -296,22 +307,22 @@
   <script>
     // Function to open the popup for the green icon
     function openPopup() {
-      document.getElementById('popup').style.display = 'flex';
+      document.getElementById('popup-overlay').style.display = 'flex';
     }
 
     // Function to close the popup for the green icon
     function closePopup() {
-      document.getElementById('popup').style.display = 'none';
+      document.getElementById('popup-overlay').style.display = 'none';
     }
 
     // Function to open the popup for the download button
     function openDownloadPopup() {
-      document.getElementById('download-popup').style.display = 'flex';
+      document.getElementById('download-popup-overlay').style.display = 'flex';
     }
 
     // Function to close the popup for the download button
     function closeDownloadPopup() {
-      document.getElementById('download-popup').style.display = 'none';
+      document.getElementById('download-popup-overlay').style.display = 'none';
     }
   </script>
 </body>
