@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Card</title>
+  <title>بطاقة تفاعلية</title>
+  <!-- Import Lateef Font -->
+  <link href="https://fonts.googleapis.com/earlyaccess/lateef.css" rel="stylesheet">
   <style>
-    /* From Uiverse.io by eslam-hany */
+    /* General Reset */
     body {
       margin: 0;
       display: flex;
@@ -13,19 +15,21 @@
       align-items: center;
       height: 100vh;
       background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
+      font-family: 'Lateef', serif;
     }
 
+    /* Card Styling */
     .card {
       position: relative;
       width: 220px;
       height: 320px;
-      background: mediumturquoise;
+      background: linear-gradient(135deg, darkgreen, lightgreen);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 25px;
       font-weight: bold;
+      color: white;
       border-radius: 15px;
       cursor: pointer;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -36,6 +40,7 @@
       transform: scale(1.05);
     }
 
+    /* Corner Effects */
     .card::before,
     .card::after {
       position: absolute;
@@ -47,7 +52,7 @@
       justify-content: center;
       font-size: 25px;
       font-weight: bold;
-      background-color: lightblue;
+      background-color: rgba(255, 255, 255, 0.3);
       transition: all 0.5s;
     }
 
@@ -63,6 +68,7 @@
       border-radius: 0 100% 0 15px;
     }
 
+    /* Hover Effects */
     .card:hover::before,
     .card:hover::after {
       width: 100%;
@@ -73,6 +79,7 @@
 
     .card:hover::after {
       content: "🤍";
+      background-color: rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
