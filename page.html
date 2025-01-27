@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Well Done Wiki</title>
+  <title>ويكي مستمرون</title>
   
   <!-- Import Lateef Font -->
+  <link href="https://fonts.googleapis.com/earlyaccess/lateef.css" rel="stylesheet">
+  
+  <!-- Inline Critical CSS for Faster Load -->
   <style>
-    @import url('https://fonts.googleapis.com/earlyaccess/lateef.css');
-
     /* General Reset */
     body, html {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Lateef', serif;
-      font-size: 25px;  /* Set font size globally */
+      font-size: 25px;
       background-color: #ffffff;
       color: #333;
       height: 100%;
@@ -25,23 +26,13 @@
 
     /* Keyframes for Fade-in Animation */
     @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes gradientMove {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     /* Hero Section Styling */
@@ -49,36 +40,34 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px; /* Reduced padding for a smaller header */
+      padding: 10px 20px;
       background: #f5f5f5;
       border-bottom: 2px solid #ddd;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .hero img {
-      width: 80px; /* Smaller size for images */
+      width: 80px;
       height: 80px;
       border-radius: 12px;
-      transition: all 0.3s ease; /* Smooth transition for hover effect */
+      transition: all 0.3s ease;
     }
 
     .hero img:hover {
-      width: 70px; /* Shrinks slightly on hover */
-      height: 70px;
+      transform: scale(0.95);
     }
 
     .hero-text {
-      font-size: 1.5rem; /* Smaller text size */
+      font-size: 1.5rem;
       font-weight: bold;
       text-align: center;
       flex-grow: 1;
       color: #333;
-      transition: transform 0.3s ease, font-size 0.3s ease; /* Transition for hover effect */
+      transition: transform 0.3s ease, font-size 0.3s ease;
     }
 
     .hero-text:hover {
-      font-size: 1.4rem; /* Slightly smaller text on hover */
-      transform: scale(0.95); /* Adds a subtle shrink effect */
+      transform: scale(0.95);
     }
 
     /* Wiki Content Styling */
@@ -103,23 +92,23 @@
       animation: gradientMove 3s linear infinite, fadeIn 1s ease-in-out;
     }
 
-    /* Second Main Part Styling */
+    /* Secondary Text Styling */
     .secondary-text {
       font-size: 1.5rem;
       font-weight: 500;
       color: #333;
-      opacity: 0; /* Starts hidden */
-      animation: fadeIn 1.5s ease-in-out 0.5s forwards; /* Fades in after a short delay */
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in-out 0.5s forwards;
     }
 
-    /* Bottom Section Styling */
+    /* Bottom Text Styling */
     .bottom-text {
       margin-top: 50px;
       font-size: 1.8rem;
       font-weight: bold;
       color: #444;
       opacity: 0;
-      animation: fadeIn 2s ease-in-out 1s forwards; /* Fades in later */
+      animation: fadeIn 2s ease-in-out 1s forwards;
     }
 
     /* Download Button Styling */
@@ -127,36 +116,32 @@
       line-height: 1;
       background-color: transparent;
       cursor: pointer;
-      display: inline-block; /* Changed to inline-block for text-only button */
+      display: inline-block;
       padding: 1em 2em;
-      color: transparent;  /* Make text color transparent */
+      color: transparent;
       font-weight: 700;
       border: 2px solid transparent;
-      font-size: 1.8rem;  /* Larger font size for emphasis */
+      font-size: 1.8rem;
       border-radius: 2em;
       text-align: center;
       font-family: 'Lateef', serif;
       background: linear-gradient(90deg, darkgreen 0%, lightgreen 100%);
       background-size: 200% 200%;
-      -webkit-background-clip: text;  /* This makes the gradient visible on the text */
+      -webkit-background-clip: text;
       animation: gradientMove 3s ease-in-out infinite;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Hover Effect */
     .button:hover {
-      border-color: #f4f5f2;
-      transform: scale(1.1);  /* Slight zoom effect on hover */
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Soft shadow on hover */
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
 
-    /* Active State (click effect) */
     .button:active {
       transform: scale(0.98);
-      box-shadow: 0 0.5em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
     }
 
-    /* Green Icon Text (Small Icon) */
+    /* Green Icon Styling */
     .green-icon {
       margin-top: 20px;
       font-size: 1.5rem;
@@ -166,20 +151,19 @@
       transition: transform 0.3s ease;
     }
 
-    /* Hover Effect for Green Icon */
     .green-icon:hover {
-      transform: scale(1.2); /* Slight zoom effect on hover */
+      transform: scale(1.2);
     }
 
     /* Popup Styling */
     .popup {
-      display: none; /* Hidden by default */
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      background-color: rgba(0, 0, 0, 0.5);
       justify-content: center;
       align-items: center;
       z-index: 9999;
@@ -189,7 +173,7 @@
       background-color: white;
       padding: 40px;
       border-radius: 12px;
-      width: 80%;
+      width: 90%;
       max-width: 600px;
       font-size: 1.6rem;
       font-family: 'Lateef', serif;
@@ -198,7 +182,7 @@
       animation: fadeIn 0.5s ease-in-out;
     }
 
-    /* Back Button in Popup */
+    /* Back Button Styling */
     .back-button {
       display: inline-block;
       margin-top: 20px;
@@ -215,30 +199,81 @@
       background-color: #45a049;
     }
 
+    /* Download Buttons Styling */
+    .download-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      gap: 20px;
+    }
+
+    .download-button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .download-button.android {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .download-button.ios {
+      background-color: #000;
+      color: white;
+    }
+
+    .download-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-text {
+        font-size: 1.2rem;
+      }
+      .main-text {
+        font-size: 2rem;
+      }
+      .secondary-text {
+        font-size: 1.2rem;
+      }
+      .bottom-text {
+        font-size: 1.4rem;
+      }
+      .download-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Hero Section (Header) -->
   <header class="hero">
-    <img src="image1.png" alt="Image 1 (Top Left)">
+    <img src="image1.png" alt="شعار الحملة (أعلى اليسار)" loading="lazy">
     <div class="hero-text">مستمرون</div>
-    <img src="image2.png" alt="Image 2 (Top Right)">
+    <img src="image2.png" alt="شعار الحملة (أعلى اليمين)" loading="lazy">
   </header>
 
   <!-- Wiki Content (Main Section) -->
   <div class="wiki-container">
-    <!-- Main Text Section -->
     <div class="main-text">ما الهدف؟</div>
-    <!-- Secondary Text Section -->
     <div class="secondary-text">تهدف هذه الحملة الى التذكير بمقاطعة المنتجات التي ثبت دعمها للكيان الصهيوني الغاصب</div>
-    <!-- Bottom Text Section -->
     <div class="bottom-text">عن حديث أنس بن مالك (رضي الله عنه) قال: قال رسول الله (صلى الله عليه وسلم): انصر أخاكَ ظالماً أو مظلوماً، فقال رجل: يا رسول الله، أنصره إذا كان مظلوماً، افرأيتَ إذا كان ظالماً كيف أنصره؟ قال: تحجزه أو تمنعه من الظلم فإن ذلك نصره. | رواه البخاري</div>
-
-    <!-- Green Icon for Popup -->
     <div class="green-icon" onclick="openPopup()">⭐</div>
   </div>
 
-  <!-- Popup -->
+  <!-- Download Button -->
+  <a href="#" class="button" onclick="openDownloadPopup()">تنزيل التطبيق</a>
+
+  <!-- Popup for Green Icon -->
   <div id="popup" class="popup">
     <div class="popup-content">
       <p>توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه فوجب أن نصحح المبدأ بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط بل هي باب إنساني مهم.. يمكنكم تنزيل التطبيق المرفق بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان</p>
@@ -246,20 +281,37 @@
     </div>
   </div>
 
-  <!-- Download Button (Text Only with Animated Gradient) -->
-  <a href="your-link-here.com" class="button" target="_blank">
-    تنزيل التطبيق
-  </a>
+  <!-- Popup for Download Button -->
+  <div id="download-popup" class="popup">
+    <div class="popup-content">
+      <p>اختر نظام التشغيل لتنزيل التطبيق:</p>
+      <div class="download-buttons">
+        <a href="https://your-android-download-link.com" class="download-button android" target="_blank">Android</a>
+        <a href="https://your-ios-download-link.com" class="download-button ios" target="_blank">iOS</a>
+      </div>
+      <a href="#" class="back-button" onclick="closeDownloadPopup()">رجوع</a>
+    </div>
+  </div>
 
   <script>
-    // Function to open the popup
+    // Function to open the popup for the green icon
     function openPopup() {
       document.getElementById('popup').style.display = 'flex';
     }
 
-    // Function to close the popup
+    // Function to close the popup for the green icon
     function closePopup() {
       document.getElementById('popup').style.display = 'none';
+    }
+
+    // Function to open the popup for the download button
+    function openDownloadPopup() {
+      document.getElementById('download-popup').style.display = 'flex';
+    }
+
+    // Function to close the popup for the download button
+    function closeDownloadPopup() {
+      document.getElementById('download-popup').style.display = 'none';
     }
   </script>
 </body>
