@@ -30,7 +30,7 @@
       color: #333;
       min-height: 100vh;
       scroll-behavior: smooth;
-      scroll-padding-top: 140px;
+      scroll-padding-top: 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -38,8 +38,11 @@
 
     .container {
       width: 100%;
-      max-width: 1200px;
-      padding: 0 1rem;
+      max-width: 100%;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .hero {
@@ -51,21 +54,24 @@
       backdrop-filter: blur(10px);
       position: fixed;
       width: 100%;
-      max-width: 1200px;
       top: 0;
       z-index: 1000;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       border-bottom: 2px solid var(--secondary);
-      height: 110px;
-      box-sizing: border-box;
+      height: 120px;
     }
 
     .hero img {
       width: 80px;
       height: 80px;
       border-radius: 16px;
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero img:hover {
+      transform: scale(0.95) rotate(-2deg);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .hero-text {
@@ -73,8 +79,24 @@
       font-weight: 700;
       color: var(--dark);
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin: 0 1rem;
-      white-space: nowrap;
+      position: relative;
+    }
+
+    .hero-text::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 50%;
+      width: 60%;
+      height: 3px;
+      background: var(--primary);
+      transform: translateX(50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero-text:hover::after {
+      opacity: 1;
     }
 
     .wiki-container {
@@ -83,7 +105,9 @@
       opacity: 0;
       animation: fadeInUp 0.8s ease 0.2s forwards;
       width: 100%;
-      box-sizing: border-box;
+      flex-grow: 1;
+      height: calc(100vh - 140px);
+      overflow-y: auto;
     }
 
     .main-text {
@@ -94,7 +118,6 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 2rem;
       text-align: center;
-      line-height: 1.3;
     }
 
     .secondary-text {
@@ -121,16 +144,32 @@
       background: linear-gradient(to left, rgba(129, 199, 132, 0.1), transparent);
       opacity: 0;
       animation: fadeInUp 0.8s ease 0.6s forwards;
-      line-height: 1.7;
     }
 
     .main-buttons {
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
       justify-content: center;
       margin: 3rem auto;
       flex-wrap: wrap;
-      max-width: 800px;
+      align-items: center;
+    }
+
+    .download-section {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .download-note {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 300px;
+      text-align: center;
+      line-height: 1.4;
+      margin: 0;
     }
 
     .button {
@@ -146,7 +185,6 @@
       animation: fadeInUp 0.8s ease 1.2s forwards;
       transform: translateY(20px);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
     }
 
     .download-btn {
@@ -225,7 +263,6 @@
       border: 2px solid transparent;
       position: relative;
       overflow: hidden;
-      flex-shrink: 0;
     }
 
     .android {
@@ -269,7 +306,7 @@
     }
 
     .faq-content {
-      max-height: 70vh;
+      max-height: 60vh;
       overflow-y: auto;
       padding: 1rem;
     }
@@ -283,13 +320,29 @@
       font-weight: 700;
       color: var(--dark);
       font-size: 1.3rem;
-      margin-bottom: 0.5rem;
     }
 
     .answer {
       color: #555;
       line-height: 1.6;
       font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: var(--dark);
+      transform: scale(1.05);
     }
 
     @keyframes fadeInUp {
@@ -298,54 +351,50 @@
     }
 
     @media (max-width: 768px) {
-      body { 
-        font-size: 20px;
-        scroll-padding-top: 100px;
+      body { font-size: 20px; }
+      
+      .hero { 
+        padding: 0.8rem 1rem;
+        height: 100px;
       }
       
-      .hero {
-        height: auto;
-        padding: 0.5rem 1rem;
+      .hero img { 
+        width: 60px; 
+        height: 60px; 
       }
       
-      .hero img {
-        width: 60px;
-        height: 60px;
-        margin: 0 5px;
+      .hero-text { 
+        font-size: 1.5rem; 
       }
-
-      .hero-text {
-        font-size: 1.8rem;
-        white-space: normal;
-        line-height: 1.3;
-      }
-
+      
       .wiki-container {
-        margin-top: 100px;
+        margin-top: 110px;
+        height: calc(100vh - 110px);
         padding: 1rem;
       }
-
-      .main-buttons {
-        margin: 2rem auto;
-        gap: 1rem;
+      
+      .button { 
+        padding: 1rem 2rem; 
+        font-size: 1.1rem; 
       }
-
-      .button {
-        padding: 0.8rem 1.5rem;
-        font-size: 1.2rem;
-        width: 100%;
-        max-width: 300px;
+      
+      .main-buttons { 
+        flex-direction: column; 
+        gap: 1.5rem;
       }
-
-      .download-buttons {
+      
+      .download-buttons { 
+        flex-direction: column; 
+      }
+      
+      .download-section {
         flex-direction: column;
-        gap: 1rem;
+        text-align: center;
       }
-
-      .download-button {
-        width: 100%;
-        justify-content: center;
-        padding: 1rem;
+      
+      .download-note {
+        font-size: 1rem;
+        max-width: 250px;
       }
     }
   </style>
@@ -375,7 +424,12 @@
       <div class="green-icon" onclick="openPopup()">⭐</div>
       
       <div class="main-buttons">
-        <a href="#" class="button download-btn" onclick="openDownloadPopup()">تنزيل التطبيق</a>
+        <div class="download-section">
+          <a href="#" class="button download-btn" onclick="openDownloadPopup()">تنزيل التطبيق</a>
+          <div class="download-note">
+            (التطبيق يحتوي على قائمة محدثة بالمنتجات والمتاجر الداعمة للكيان الصهيوني)
+          </div>
+        </div>
         <a href="#" class="button faq-btn" onclick="openFaqPopup()">الأسئلة الشائعة</a>
       </div>
     </div>
@@ -387,7 +441,7 @@
       <p>
         توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه فوجب أن نصحح المبدأ بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط بل هي باب إنساني مهم.. يمكنكم تنزيل التطبيق المرفق بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان
       </p>
-      <a href="#" class="button download-btn" onclick="closePopup()">رجوع</a>
+      <a href="#" class="back-button" onclick="closePopup()">رجوع</a>
     </div>
   </div>
 
@@ -404,14 +458,6 @@
           أندرويد
         </a>
         
-        <a href="https://apps.apple.com/app/belzamesh-%D8%A8%D9%84%D8%B2%D9%85%D8%B4/id6472342593" 
-           class="download-button ios" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          <i class="fab fa-apple"></i>
-          آيفون
-        </a>
-        
         <a href="https://bdnaash.com/" 
            class="download-button website" 
            target="_blank" 
@@ -419,8 +465,16 @@
           <i class="fas fa-globe"></i>
           الموقع الإلكتروني
         </a>
+        
+        <a href="https://apps.apple.com/app/belzamesh-%D8%A8%D9%84%D8%B2%D9%85%D8%B4/id6472342593" 
+           class="download-button ios" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <i class="fab fa-apple"></i>
+          آيفون
+        </a>
       </div>
-      <a href="#" class="button download-btn" onclick="closeDownloadPopup()">رجوع</a>
+      <a href="#" class="back-button" onclick="closeDownloadPopup()">رجوع</a>
     </div>
   </div>
 
@@ -465,84 +519,75 @@
           <div class="answer">لا، المقاطعة ليست رد فعل مؤقت، الاحتلال لا يزال مستمرًا، والشركات التي دعمته سابقًا قد تعود لدعمه مستقبلاً</div>
         </div>
       </div>
-      <a href="#" class="button download-btn" onclick="closeFaqPopup()">رجوع</a>
+      <a href="#" class="back-button" onclick="closeFaqPopup()">رجوع</a>
     </div>
   </div>
 
   <script>
-    // Popup Management System
-    const popupManager = {
-      currentPopup: null,
-
-      show(id) {
-        this.currentPopup = document.getElementById(id);
-        this.currentPopup.style.display = 'flex';
-        setTimeout(() => {
-          this.currentPopup.style.opacity = '1';
-          const content = this.currentPopup.querySelector('.popup-content');
-          content.style.opacity = '1';
-          content.style.transform = 'scale(1)';
-        }, 10);
-        document.addEventListener('keydown', this.handleEscape);
-        this.currentPopup.addEventListener('click', this.handleOutsideClick);
-      },
-
-      hide() {
-        if (!this.currentPopup) return;
-        const content = this.currentPopup.querySelector('.popup-content');
-        this.currentPopup.style.opacity = '0';
-        content.style.transform = 'scale(0.95)';
-        content.style.opacity = '0';
-        setTimeout(() => {
-          this.currentPopup.style.display = 'none';
-          this.currentPopup = null;
-        }, 300);
-        document.removeEventListener('keydown', this.handleEscape);
-        this.currentPopup.removeEventListener('click', this.handleOutsideClick);
-      },
-
-      handleEscape: (e) => {
-        if (e.key === 'Escape') popupManager.hide();
-      },
-
-      handleOutsideClick: (e) => {
-        if (e.target.classList.contains('popup-overlay')) popupManager.hide();
-      }
-    };
-
     // Popup Functions
     function openPopup() {
-      popupManager.show('popup-overlay');
+      showPopup('popup-overlay');
     }
 
     function closePopup() {
-      popupManager.hide();
+      hidePopup('popup-overlay');
     }
 
     function openDownloadPopup() {
-      popupManager.show('download-popup-overlay');
+      showPopup('download-popup-overlay');
     }
 
     function closeDownloadPopup() {
-      popupManager.hide();
+      hidePopup('download-popup-overlay');
     }
 
     function openFaqPopup() {
-      popupManager.show('faq-popup-overlay');
+      showPopup('faq-popup-overlay');
     }
 
     function closeFaqPopup() {
-      popupManager.hide();
+      hidePopup('faq-popup-overlay');
     }
 
-    // Initialize animations
-    document.addEventListener('DOMContentLoaded', () => {
-      // Trigger initial animations
-      const animatedElements = document.querySelectorAll('[style*="animation"]');
-      animatedElements.forEach(el => {
-        el.style.visibility = 'visible';
-      });
-    });
+    function showPopup(id) {
+      const popup = document.getElementById(id);
+      popup.style.display = 'flex';
+      setTimeout(() => {
+        popup.style.opacity = '1';
+        popup.querySelector('.popup-content').style.opacity = '1';
+        popup.querySelector('.popup-content').style.transform = 'scale(1)';
+      }, 10);
+      document.addEventListener('keydown', handleEscape);
+      popup.addEventListener('click', handlePopupClick);
+    }
+
+    function hidePopup(id) {
+      const popup = document.getElementById(id);
+      popup.style.opacity = '0';
+      popup.querySelector('.popup-content').style.transform = 'scale(0.95)';
+      popup.querySelector('.popup-content').style.opacity = '0';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 300);
+      document.removeEventListener('keydown', handleEscape);
+      popup.removeEventListener('click', handlePopupClick);
+    }
+
+    function handleEscape(e) {
+      if (e.key === 'Escape') {
+        closePopup();
+        closeDownloadPopup();
+        closeFaqPopup();
+      }
+    }
+
+    function handlePopupClick(e) {
+      if (e.target.classList.contains('popup-overlay')) {
+        closePopup();
+        closeDownloadPopup();
+        closeFaqPopup();
+      }
+    }
   </script>
 </body>
 </html>
