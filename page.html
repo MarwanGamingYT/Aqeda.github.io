@@ -1,593 +1,490 @@
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حملة مستمرون</title>
-  <link href="https://fonts.googleapis.com/earlyaccess/lateef.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="preload" href="image1.png" as="image">
-  <link rel="preload" href="image2.png" as="image">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حملة مستمرون</title>
+    <link href="https://fonts.googleapis.com/earlyaccess/lateef.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Animations */
+        @keyframes pageLoad {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-  <style>
-    :root {
-      --primary: #2e7d32;
-      --secondary: #81c784;
-      --accent: #ffd54f;
-      --dark: #1b5e20;
-      --light: #f8f9fa;
-      --gradient: linear-gradient(135deg, var(--dark), var(--primary));
-    }
+        @keyframes headerSlideRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Lateef', serif;
-      font-size: 24px;
-      background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0);
-      background-size: 40px 40px;
-      color: #333;
-      min-height: 100vh;
-      scroll-behavior: smooth;
-      scroll-padding-top: 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        @keyframes headerSlideLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
 
-    .container {
-      width: 100%;
-      max-width: 100%;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+        @keyframes headerTitleFade {
+            from { opacity: 0; letter-spacing: 10px; }
+            to { opacity: 1; letter-spacing: normal; }
+        }
 
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.97);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      border-bottom: 2px solid var(--secondary);
-      height: 120px;
-    }
+        :root {
+            --primary: #2e7d32;
+            --secondary: #81c784;
+            --accent: #ffd54f;
+            --dark: #1b5e20;
+            --light: #f8f9fa;
+        }
 
-    .hero img {
-      width: 80px;
-      height: 80px;
-      border-radius: 16px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .hero img:hover {
-      transform: scale(0.95) rotate(-2deg);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+        body {
+            font-family: 'Lateef', serif;
+            font-size: 22px;
+            background: #f8f9fa;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-    .hero-text {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--dark);
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      position: relative;
-    }
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-    .hero-text::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      right: 50%;
-      width: 60%;
-      height: 3px;
-      background: var(--primary);
-      transform: translateX(50%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+        .header img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            animation: headerSlideRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+        }
 
-    .hero-text:hover::after {
-      opacity: 1;
-    }
+        .header img:last-child {
+            animation-name: headerSlideLeft;
+        }
 
-    .wiki-container {
-      margin-top: 140px;
-      padding: 2rem 1rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease 0.2s forwards;
-      width: 100%;
-      flex-grow: 1;
-      height: calc(100vh - 140px);
-      overflow-y: auto;
-    }
+        .header-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            text-align: center;
+            flex-grow: 1;
+            position: relative;
+            opacity: 0;
+            animation: headerTitleFade 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+        }
 
-    .main-text {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-weight: 700;
-      background: linear-gradient(45deg, var(--dark), var(--primary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+        .header-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60%;
+            height: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-    .secondary-text {
-      font-size: clamp(1.2rem, 3vw, 1.4rem);
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto 2rem;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease 0.4s forwards;
-    }
+        .header-title:hover::after {
+            opacity: 1;
+        }
 
-    .bottom-text {
-      font-size: clamp(1.3rem, 3vw, 1.6rem);
-      color: var(--dark);
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem;
-      border-right: 4px solid var(--secondary);
-      background: linear-gradient(to left, rgba(129, 199, 132, 0.1), transparent);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease 0.6s forwards;
-    }
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: pageLoad 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
+        }
 
-    .main-buttons {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      margin: 3rem auto;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+        .section-title {
+            font-size: 2rem;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .download-section {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        .content-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
 
-    .download-note {
-      font-size: 1.1rem;
-      color: #666;
-      max-width: 300px;
-      text-align: center;
-      line-height: 1.4;
-      margin: 0;
-    }
+        .hadith-text {
+            border-right: 4px solid var(--secondary);
+            padding-right: 1rem;
+            background: linear-gradient(to left, rgba(129, 199, 132, 0.1), transparent);
+        }
 
-    .button {
-      display: block;
-      width: fit-content;
-      padding: 1rem 3rem;
-      font-size: 1.4rem;
-      color: white;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease 1.2s forwards;
-      transform: translateY(20px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+        /* Buttons Section */
+        .actions-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
 
-    .download-btn {
-      background: var(--gradient);
-    }
+        .star-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+            role: button;
+            tabindex: 0;
+        }
 
-    .faq-btn {
-      background: #ffffff;
-      color: #1d1d1f;
-      border: 2px solid #1d1d1f;
-    }
+        .star-icon:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
 
-    .button:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    }
+        .button-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    .green-icon {
-      display: block;
-      text-align: center;
-      font-size: 2.5rem;
-      color: var(--primary);
-      cursor: pointer;
-      margin: 2rem auto;
-      transition: transform 0.3s ease;
-      animation: fadeInUp 0.8s ease 0.8s forwards;
-      opacity: 0;
-    }
+        .main-button {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
 
-    .popup-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+        .download-btn {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
 
-    .popup-content {
-      background: rgba(255, 255, 255, 0.97);
-      padding: 2.5rem;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      transform: scale(0.95);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
+        .faq-btn {
+            background: white;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
 
-    .download-buttons {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      margin: 3rem 0;
-      flex-wrap: wrap;
-    }
+        .download-note {
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 300px;
+            margin: 1rem auto;
+            text-align: center;
+        }
 
-    .download-button {
-      padding: 1.2rem 2.5rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 1.3rem;
-      border: 2px solid transparent;
-      position: relative;
-      overflow: hidden;
-    }
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            z-index: 2000;
+        }
 
-    .android {
-      background: #ffffff;
-      color: #34a853;
-      border: 2px solid #34a853;
-      box-shadow: 0 4px 15px rgba(52, 168, 83, 0.2);
-    }
+        .popup-content {
+            background: white;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            animation: popupIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-    .ios {
-      background: #ffffff;
-      color: #1d1d1f;
-      border: 2px solid #1d1d1f;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+        @keyframes popupIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
 
-    .website {
-      background: #ffffff;
-      color: #1d1d1f;
-      border: 2px solid #1d1d1f;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
 
-    .download-button:hover {
-      transform: translateY(-3px) scale(1.05);
-    }
+        .download-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
 
-    .android:hover {
-      background: #34a853;
-      color: white;
-    }
+        .android { background: #3ddc84; }
+        .ios { background: #000; }
+        .website { background: var(--primary); }
 
-    .ios:hover {
-      background: #1d1d1f;
-      color: white;
-    }
+        .faq-content {
+            padding: 1rem;
+        }
 
-    .website:hover {
-      background: #1d1d1f;
-      color: white;
-    }
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 1.5rem 0;
+        }
 
-    .faq-content {
-      max-height: 60vh;
-      overflow-y: auto;
-      padding: 1rem;
-    }
+        .question {
+            font-weight: bold;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
 
-    .faq-item {
-      border-bottom: 1px solid #eee;
-      padding: 1.5rem 0;
-    }
+        .answer {
+            color: #666;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+        }
 
-    .question {
-      font-weight: 700;
-      color: var(--dark);
-      font-size: 1.3rem;
-    }
-
-    .answer {
-      color: #555;
-      line-height: 1.6;
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-    }
-
-    .back-button {
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      background: var(--primary);
-      color: white;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-    }
-
-    .back-button:hover {
-      background: var(--dark);
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      body { font-size: 20px; }
-      
-      .hero { 
-        padding: 0.8rem 1rem;
-        height: 100px;
-      }
-      
-      .hero img { 
-        width: 60px; 
-        height: 60px; 
-      }
-      
-      .hero-text { 
-        font-size: 1.5rem; 
-      }
-      
-      .wiki-container {
-        margin-top: 110px;
-        height: calc(100vh - 110px);
-        padding: 1rem;
-      }
-      
-      .button { 
-        padding: 1rem 2rem; 
-        font-size: 1.1rem; 
-      }
-      
-      .main-buttons { 
-        flex-direction: column; 
-        gap: 1.5rem;
-      }
-      
-      .download-buttons { 
-        flex-direction: column; 
-      }
-      
-      .download-section {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .download-note {
-        font-size: 1rem;
-        max-width: 250px;
-      }
-    }
-  </style>
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.8rem;
+            }
+            
+            .header img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .header-title {
+                font-size: 1.4rem;
+            }
+            
+            .main-content {
+                margin-top: 90px;
+                padding: 1rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .main-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <img src="image1.png" alt="شعار الحملة" width="80" height="80" loading="lazy">
-      <div class="hero-text">مستمرون</div>
-      <img src="image2.png" alt="شعار الحملة" width="80" height="80" loading="lazy">
+    <header class="header">
+        <img src="image1.png" alt="شعار حملة مستمرون - يد مرفوعة مع علم فلسطين" loading="lazy" class="header-img-left">
+        <h1 class="header-title">مستمرون</h1>
+        <img src="image2.png" alt="شعار حملة مستمرون - خريطة فلسطين بحرائر" loading="lazy" class="header-img-right">
     </header>
 
-    <div class="wiki-container">
-      <div class="main-text">ما الهدف؟</div>
-      
-      <div class="secondary-text">
-        تهدف هذه الحملة إلى التذكير بمقاطعة المنتجات التي ثبت دعمها للكيان الصهيوني الغاصب
-      </div>
-
-      <div class="bottom-text">
-        عن حديث أنس بن مالك (رضي الله عنه) قال: قال رسول الله (صلى الله عليه وسلم): 
-        "انصر أخاكَ ظالماً أو مظلوماً، فقال رجل: يا رسول الله، أنصره إذا كان مظلوماً، 
-        افرأيتَ إذا كان ظالماً كيف أنصره؟ قال: تحجزه أو تمنعه من الظلم فإن ذلك نصره" 
-        | رواه البخاري
-      </div>
-
-      <div class="green-icon" onclick="openPopup()">⭐</div>
-      
-      <div class="main-buttons">
-        <div class="download-section">
-          <a href="#" class="button download-btn" onclick="openDownloadPopup()">تنزيل التطبيق</a>
-          <div class="download-note">
-            (التطبيق يحتوي على قائمة محدثة بالمنتجات والمتاجر الداعمة للكيان الصهيوني)
-          </div>
-        </div>
-        <a href="#" class="button faq-btn" onclick="openFaqPopup()">الأسئلة الشائعة</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Info Popup -->
-  <div id="popup-overlay" class="popup-overlay">
-    <div class="popup-content">
-      <p>
-        توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه فوجب أن نصحح المبدأ بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط بل هي باب إنساني مهم.. يمكنكم تنزيل التطبيق المرفق بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان
-      </p>
-      <a href="#" class="back-button" onclick="closePopup()">رجوع</a>
-    </div>
-  </div>
-
-  <!-- Download Popup -->
-  <div id="download-popup-overlay" class="popup-overlay">
-    <div class="popup-content">
-      <p>اختر نظام التشغيل لتنزيل التطبيق:</p>
-      <div class="download-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.moqate3.moqate3" 
-           class="download-button android" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          <i class="fab fa-android"></i>
-          أندرويد
-        </a>
+    <main class="main-content">
+        <h2 class="section-title">ما الهدف؟</h2>
         
-        <a href="https://bdnaash.com/" 
-           class="download-button website" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          <i class="fas fa-globe"></i>
-          الموقع الإلكتروني
-        </a>
-        
-        <a href="https://apps.apple.com/app/belzamesh-%D8%A8%D9%84%D8%B2%D9%85%D8%B4/id6472342593" 
-           class="download-button ios" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          <i class="fab fa-apple"></i>
-          آيفون
-        </a>
-      </div>
-      <a href="#" class="back-button" onclick="closeDownloadPopup()">رجوع</a>
+        <div class="content-box">
+            <p>تهدف هذه الحملة إلى التذكير بمقاطعة المنتجات التي ثبت دعمها للكيان الصهيوني الغاصب</p>
+        </div>
+
+        <div class="content-box hadith-text">
+            <p>عن حديث أنس بن مالك (رضي الله عنه) قال: قال رسول الله (صلى الله عليه وسلم): 
+            "انصر أخاكَ ظالماً أو مظلوماً، فقال رجل: يا رسول الله، أنصره إذا كان مظلوماً، 
+            افرأيتَ إذا كان ظالماً كيف أنصره؟ قال: تحجزه أو تمنعه من الظلم فإن ذلك نصره" 
+            | رواه البخاري</p>
+        </div>
+
+        <div class="actions-section">
+            <div class="star-icon" onclick="openPopup('infoPopup')" role="button" tabindex="0">⭐</div>
+            
+            <div class="button-group">
+                <div class="download-section">
+                    <a href="#" class="main-button download-btn" onclick="openPopup('downloadPopup')">
+                        <i class="fas fa-download"></i>
+                        تنزيل التطبيق
+                    </a>
+                    <p class="download-note">(يحتوي التطبيق على قائمة محدثة بالمنتجات المدعومة)</p>
+                </div>
+                <a href="#" class="main-button faq-btn" onclick="openPopup('faqPopup')">
+                    <i class="fas fa-question-circle"></i>
+                    الأسئلة الشائعة
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popups -->
+    <div class="popup-overlay" id="infoPopup">
+        <div class="popup-content">
+            <h2 style="text-align: center; margin-bottom: 1rem;">معلومات الحملة</h2>
+            <div class="content-box">
+                <p>
+                    توقف الحرب في غزة لا يعني انتهاء مبدأ المقاطعة لأن كينونة هذه الشركات لم تكن على مبدأ تهجمي واحد فقط، 
+                    فإن من دعم كياناً ساهم متمثلاً بأفعاله بأقصى أنواع عدم الإنسانية فهو من جنسه. فوجب أن نصحح المبدأ 
+                    بأن يكون استغناءاً تاماً وليس مقاطعة وقتية فقط، بل هي باب إنساني مهم. يمكنكم تنزيل التطبيق المرفق 
+                    بالصفحة الرئيسية من خلال الضغط على زر التنزيل لمعرفة المنتجات الداعمة للكيان.
+                </p>
+            </div>
+            <button class="main-button" onclick="closePopup('infoPopup')">رجوع</button>
+        </div>
     </div>
-  </div>
 
-  <!-- FAQ Popup -->
-  <div id="faq-popup-overlay" class="popup-overlay">
-    <div class="popup-content">
-      <div class="faq-content">
-        <h2>الأسئلة الشائعة</h2>
-        
-        <div class="faq-item">
-          <div class="question">اني اخذ من شركات داخل العراق فما يوصل شي لإلهم؟</div>
-          <div class="answer">الشركات داخل البلد تابعة للشركة الأم.</div>
+    <div class="popup-overlay" id="downloadPopup">
+        <div class="popup-content">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">اختر نظام التشغيل</h2>
+            <div class="download-options">
+                <a href="https://play.google.com/store/apps/details?id=com.moqate3.moqate3" 
+                   class="download-option android"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fab fa-android"></i>
+                    أندرويد
+                </a>
+                
+                <a href="https://bdnaash.com/" 
+                   class="download-option website"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fas fa-globe"></i>
+                    الموقع الإلكتروني
+                </a>
+                
+                <a href="https://apps.apple.com/app/belzamesh-%D8%A8%D9%84%D8%B2%D9%85%D8%B4/id6472342593" 
+                   class="download-option ios"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fab fa-apple"></i>
+                    آيفون
+                </a>
+            </div>
+            <button class="main-button" onclick="closePopup('downloadPopup')">رجوع</button>
         </div>
-
-        <div class="faq-item">
-          <div class="question">شنو تأثير المقاطعة؟ او كوني شخص واحد شراح اسوي؟</div>
-          <div class="answer">تأثيرها كبير على طرفين الأول مسألة الأرباح وبذلك ينتج الطرف الثاني الشركة تلاحظ مسألة الدعم للطرف المعادي لها (الكيان) والخوف من هذا البلد..وكل شخص هو مجموعة بنفسة فواحد بواحد يصبحون مجموعة فلا تستهين بالتأثير</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="question">لماذا نقاطع والباقين لا يقاطعون؟</div>
-          <div class="answer">نحن مسلمين وكل مسلم يمثل امة بنفسه فكونك مع القضية فانت تمثل دينك ومبادئك بهذا الموقف</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="question">بعض المنتجات لا نستطيع الاستغناء عنها؟</div>
-          <div class="answer">دائما اكو بدائل لكل شركة اما النتجات الثانية مثل شركات السيارات مثلا هذي امور نحتاجها ومالها بدائل فهنا تسقط المقاطعة</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="question">هل المقاطعة تكفي وحدها؟</div>
-          <div class="answer">المقاطعة جزء من النضال، لكنها ليست الوحيدة، التوعية، التبرع، والنشاط الإعلامي كلها مكملة لها.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="question">هل المقاطعة تؤثر على العمال في هذه الشركات؟</div>
-          <div class="answer">التأثير الحقيقي يقع على الاحتلال والشركات الداعمة له، والمقاطعة تدفع هذه الشركات لإعادة النظر في سياساتها.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="question">إذا توقفت الحرب، هل نوقف المقاطعة؟</div>
-          <div class="answer">لا، المقاطعة ليست رد فعل مؤقت، الاحتلال لا يزال مستمرًا، والشركات التي دعمته سابقًا قد تعود لدعمه مستقبلاً</div>
-        </div>
-      </div>
-      <a href="#" class="back-button" onclick="closeFaqPopup()">رجوع</a>
     </div>
-  </div>
 
-  <script>
-    // Popup Functions
-    function openPopup() {
-      showPopup('popup-overlay');
-    }
+    <div class="popup-overlay" id="faqPopup">
+        <div class="popup-content">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">الأسئلة الشائعة</h2>
+            <div class="faq-content">
+                <div class="faq-item">
+                    <div class="question">اني اخذ من شركات داخل العراق فما يوصل شي لإلهم؟</div>
+                    <div class="answer">الشركات داخل البلد تابعة للشركة الأم.</div>
+                </div>
 
-    function closePopup() {
-      hidePopup('popup-overlay');
-    }
+                <div class="faq-item">
+                    <div class="question">شنو تأثير المقاطعة؟ او كوني شخص واحد شراح اسوي؟</div>
+                    <div class="answer">
+                        تأثيرها كبير على طرفين: الأول مسألة الأرباح، وبذلك ينتج الطرف الثاني حيث تلاحظ الشركة 
+                        مسألة الدعم للطرف المعادي لها (الكيان) والخوف من هذا البلد. وكل شخص هو مجموعة بنفسه، 
+                        فواحد بواحد يصبحون مجموعة، فلا تستهين بالتأثير.
+                    </div>
+                </div>
 
-    function openDownloadPopup() {
-      showPopup('download-popup-overlay');
-    }
+                <div class="faq-item">
+                    <div class="question">لماذا نقاطع والباقين لا يقاطعون؟</div>
+                    <div class="answer">
+                        نحن مسلمين وكل مسلم يمثل أمة بنفسه، فكونك مع القضية فأنت تمثل دينك ومبادئك بهذا الموقف.
+                    </div>
+                </div>
 
-    function closeDownloadPopup() {
-      hidePopup('download-popup-overlay');
-    }
+                <div class="faq-item">
+                    <div class="question">بعض المنتجات لا نستطيع الاستغناء عنها؟</div>
+                    <div class="answer">
+                        دائماً يوجد بدائل لكل شركة، أما المنتجات الضرورية مثل شركات السيارات مثلاً، 
+                        هذه أمور نحتاجها وليس لها بدائل، فهنا تسقط المقاطعة.
+                    </div>
+                </div>
 
-    function openFaqPopup() {
-      showPopup('faq-popup-overlay');
-    }
+                <div class="faq-item">
+                    <div class="question">هل المقاطعة تكفي وحدها؟</div>
+                    <div class="answer">
+                        المقاطعة جزء من النضال، لكنها ليست الوحيدة، التوعية، التبرع، والنشاط الإعلامي كلها مكملة لها.
+                    </div>
+                </div>
 
-    function closeFaqPopup() {
-      hidePopup('faq-popup-overlay');
-    }
+                <div class="faq-item">
+                    <div class="question">هل المقاطعة تؤثر على العمال في هذه الشركات؟</div>
+                    <div class="answer">
+                        التأثير الحقيقي يقع على الاحتلال والشركات الداعمة له، والمقاطعة تدفع هذه الشركات 
+                        لإعادة النظر في سياساتها.
+                    </div>
+                </div>
 
-    function showPopup(id) {
-      const popup = document.getElementById(id);
-      popup.style.display = 'flex';
-      setTimeout(() => {
-        popup.style.opacity = '1';
-        popup.querySelector('.popup-content').style.opacity = '1';
-        popup.querySelector('.popup-content').style.transform = 'scale(1)';
-      }, 10);
-      document.addEventListener('keydown', handleEscape);
-      popup.addEventListener('click', handlePopupClick);
-    }
+                <div class="faq-item">
+                    <div class="question">إذا توقفت الحرب، هل نوقف المقاطعة؟</div>
+                    <div class="answer">
+                        لا، المقاطعة ليست رد فعل مؤقت، الاحتلال لا يزال مستمرًا، والشركات التي دعمته سابقًا 
+                        قد تعود لدعمه مستقبلاً.
+                    </div>
+                </div>
+            </div>
+            <button class="main-button" onclick="closePopup('faqPopup')">رجوع</button>
+        </div>
+    </div>
 
-    function hidePopup(id) {
-      const popup = document.getElementById(id);
-      popup.style.opacity = '0';
-      popup.querySelector('.popup-content').style.transform = 'scale(0.95)';
-      popup.querySelector('.popup-content').style.opacity = '0';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 300);
-      document.removeEventListener('keydown', handleEscape);
-      popup.removeEventListener('click', handlePopupClick);
-    }
+    <noscript>
+        <style>.popup-overlay { display: none; }</style>
+        <div class="content-box" style="margin: 2rem; text-align: center;">
+            يرجى تمكين الجافاسكريبت لمشاهدة كافة ميزات الموقع
+        </div>
+    </noscript>
 
-    function handleEscape(e) {
-      if (e.key === 'Escape') {
-        closePopup();
-        closeDownloadPopup();
-        closeFaqPopup();
-      }
-    }
+    <script>
+        function openPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.style.display = 'flex';
+            setTimeout(() => popup.style.opacity = '1', 10);
+        }
 
-    function handlePopupClick(e) {
-      if (e.target.classList.contains('popup-overlay')) {
-        closePopup();
-        closeDownloadPopup();
-        closeFaqPopup();
-      }
-    }
-  </script>
+        function closePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.style.opacity = '0';
+            setTimeout(() => popup.style.display = 'none', 300);
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('popup-overlay')) {
+                document.querySelectorAll('.popup-overlay').forEach(popup => closePopup(popup.id));
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.popup-overlay').forEach(popup => closePopup(popup.id));
+            }
+        });
+    </script>
 </body>
 </html>
